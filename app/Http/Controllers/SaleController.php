@@ -64,8 +64,9 @@ class SaleController extends Controller
             } else {
                 return response()->json(['error' => 'customer not found']);
             }
-            
+            //Notificando Fornecedores
             (new SaleService())->setParams($sale)->notification();
+            
             DB::commit();
             return response()->json(['data' => $sale], 200);
         } catch (Exception $ex) {
