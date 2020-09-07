@@ -25,7 +25,7 @@
         
         <div class="card">
             <h2 style="text-align: center">Detalhes do Pedido Solicitado</h2>
-            <img src="storage/imagens/wy1h2oQ4NRL03uJLzWHwm8ul0Kqo6SmEqYiTvJSl.png" alt="Avatar" style="width:100%">
+            <img src="storage/imagens/w5YxYB1TgeM8yfk4qJQvCUJViuCgYAKBYqouUzpH.png" alt="Avatar" style="width:100%">
             <div class="container">
                 <h4><b>John Doe</b></h4> 
                 <p>Architect & Engineer</p> 
