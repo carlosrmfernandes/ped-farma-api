@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'apiJwt'=> \App\Http\Middleware\ApiProtectedRoute::class,
         'chekUser' => \App\Http\Middleware\CheckUser::class,
         'providerProduct' => \App\Http\Middleware\providerProduct::class,
+        'pavoriteCheckCustomer' => \App\Http\Middleware\FavoriteCheckCustomer::class,
     ];
 
     /**

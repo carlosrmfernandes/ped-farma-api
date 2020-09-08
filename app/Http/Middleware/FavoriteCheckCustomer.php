@@ -3,9 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Provider;
-class ProviderProduct
+use App\Models\Customer;
+class FavoriteCheckCustomer
 {
+
     /**
      * Handle an incoming request.
      *
@@ -14,11 +15,13 @@ class ProviderProduct
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {       
-        $provider = Provider::where('user_id', auth()->user()->id)->first();         
-        if (auth()->user() && (auth()->user()->id != $provider->user_id)) {
+    {
+        
+        $customer = Customer::where('user_id', auth()->user()->id)->first();        
+        if (auth()->user() && (auth()->user()->id != $customer->user_id)) {
             return response()->json(['data' => 'without permission']);
         }
-        return $next($request);
-    }    
+        return $next($request);        
+    }
+
 }

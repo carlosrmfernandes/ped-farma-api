@@ -26,6 +26,7 @@ Route::group(['middleware' => ['apiJwt'], 'prefix' => 'auth',], function ($route
     Route::post('user-delete/{id}', 'UserController@destroy')->middleware('chekUser');
     Route::resource('product', 'ProductController')->middleware('providerProduct');
     Route::resource('sale', 'SaleController');
+    Route::resource('favorite', 'FavoriteProductController')->middleware('pavoriteCheckCustomer');
 });
 
 

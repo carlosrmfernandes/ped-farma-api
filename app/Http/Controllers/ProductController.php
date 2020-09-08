@@ -76,17 +76,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $ids = $request->ids;
-        if (empty($ids)) {
-            return response()->json(['categoria' => 'Nenhum item selecionado']);
-        }
-        Produto::whereIn('categoria_id', $ids)->get()->each(function($ob) {
-            $ob->delete();
-        });
-        Categoria::whereIn('id', $ids)->get()->each(function($ob) {
-            $ob->delete();
-        });
-        return response()->json(['categoria' => 'Categoria removido com sucesso']);
+        
     }
 
 }

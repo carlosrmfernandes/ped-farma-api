@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\FavoriteProduct;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
+use App\Models\Product;
+use Validator;
 
 class FavoriteProductController extends Controller
 {
@@ -28,10 +30,17 @@ class FavoriteProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validatorFavoriteProduct = Validator::make($request->all(), Sale::rules());
-
+        $product = Product::where('id', $request->productId)->first();
+        if (!$product) {
+            return response()->json(['error' => 'product not found']);
+        }
+        $validatorFavoriteProduct = Validator::make($request->all(), FavoriteProduct::rules());
         if ($validatorFavoriteProduct->fails()) {
             return response()->json(['error' => $validatorFavoriteProduct->errors()]);
+        }
+
+        if (FavoriteProduct::alreadyFavoredProduct($request->productId)) {
+            return response()->json(['data' => 'already favored product'], 200);
         }
 
         DB::beginTransaction();
@@ -79,8 +88,18 @@ class FavoriteProductController extends Controller
      */
     public function destroy($id)
     {
-        FavoriteProduct::where('id', $id)->delete();
-        return response()->json(['data' => 'Favorite product removed successfully'], 200);
+        $customer = Customer::where('user_id', auth()->user()->id)->first();        
+        if ($customer && ($customer->user_id == auth()->user()->id)) {
+            $favoriteProduct = FavoriteProduct::where('id', $id)->first();
+            if ($favoriteProduct) {
+                FavoriteProduct::where('id', $id)->delete();
+                return response()->json(['data' => 'Favorite product removed successfully'], 200);
+            } else {
+                return response()->json(['error' => 'Favorite product not found']);
+            }
+        } else {
+            return response()->json(['data' => 'without permission']);
+        }
     }
 
 }

@@ -17,7 +17,9 @@ namespace App\Services\Product;
 use App\Models\Product;
 use App\Models\Provider;
 use App\Models\Sale;
+use App\Models\FavoriteProduct;
 use Storage;
+
 class ProductService
 {
 
@@ -39,14 +41,14 @@ class ProductService
 
         if (isset($this->products)) {
             $provider = Provider::where('user_id', auth()->user()->id)->first();
-            
+
             foreach ($this->products['product'] as $pt) {
-                $attachment=null;          
+                $attachment = null;
                 if (isset($pt['attachment'])) {
-                    $attachment=$pt['attachment']->store('imagens', 'public');
-                }                                     
-                $product = Product::firstOrNew(['id' => $pt['id']]); 
-                
+                    $attachment = $pt['attachment']->store('imagens', 'public');
+                }
+                $product = Product::firstOrNew(['id' => $pt['id']]);
+
                 Storage::disk('public')->delete($product->attachment);
                 $product->name = $pt['name'];
                 $product->price = $pt['price'];
@@ -62,7 +64,7 @@ class ProductService
 
             Product::where('provider_id', $provider->id)->whereNotIn('id', $notDelete)->get()->each(function($obj) {
                 $sale = Sale::where('product_id', $obj->id)->first();
-
+                FavoriteProduct::where('product_id', $obj->id)->delete();
                 if (!$sale) {
                     $obj->delete();
                 }

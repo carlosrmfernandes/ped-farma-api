@@ -13,6 +13,7 @@ namespace App\Models;
  *
  * @author carlosfernandes
  */
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Model;
 
 class FavoriteProduct extends Model
@@ -28,8 +29,15 @@ class FavoriteProduct extends Model
     static function rules($id = null)
     {
         return [
-            'product_id' => 'required',            
+            'productId' => 'required',
         ];
+    }
+
+    static function alreadyFavoredProduct($roductId)
+    {
+        $customer = Customer::where('user_id', auth()->user()->id)->first();
+        $favoriteProduct = FavoriteProduct::where('customer_id', $customer->id)->where('product_id', $roductId)->first();
+        return $favoriteProduct;
     }
 
 }
