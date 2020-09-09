@@ -22,7 +22,7 @@ class Sale extends Model
         'customer_id', 'provider_id', 'product_id', 'quantity', 'form_payment'
     ];
     protected $visible = [
-        'customer_id', 'provider_id', 'product_id', 'quantity', 'form_payment'
+        'id','quantity', 'form_payment','product',
     ];
 
     static function rules($id = null)
@@ -32,6 +32,11 @@ class Sale extends Model
             'quantity' => 'required',
             'formPayment' => 'required',
         ];
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'id','product_id');
     }
 
 }

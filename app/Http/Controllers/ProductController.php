@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Validator;
 use App\Services\Product\ProductService;
-
+use App\Filters\Product\ProductFilter;
 class ProductController extends Controller
 {
 
@@ -15,9 +15,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-//
+    public function index(Request $request)
+    {      
+        $product = (new ProductFilter())->apply($request->all());
+        return response()->json(['data'=> $product]);
     }
 
     /**
@@ -46,7 +47,12 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        
+        $product= Product::find($id);        
+        if($product){
+            return response()->json($product);
+        }else{
+            return response()->json(['data' => 'product not found']);
+        }
     }
 
     /**

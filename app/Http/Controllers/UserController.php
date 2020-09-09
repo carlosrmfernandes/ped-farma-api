@@ -102,14 +102,14 @@ class UserController extends Controller
             if ($user) {
                 return response()->json($user);
             } else {
-                return response()->json(['error' => 'user not found']);
+                return response()->json(['data' => 'user not found']);
             }
         } else {
             $user = $users->with('customer')->where('id', $id)->first();
             if ($user) {
                 return response()->json($user);
             } else {
-                return response()->json(['error' => 'user not found']);
+                return response()->json(['data' => 'user not found']);
             }
         }
     }
@@ -173,7 +173,7 @@ class UserController extends Controller
                         'city' => $request->city,
                     ]);
                 } else {
-                    return response()->json(['error' => 'user not found']);
+                    return response()->json(['data' => 'user not found']);
                 }
             }
             DB::commit();
@@ -194,19 +194,16 @@ class UserController extends Controller
         $data = null;
 
         if ($request->disable) {
+
             User::where("id", $id)->update([
                 "active" => 0
             ]);
             $data = "disabled user successfully";
         } else {
-            $user = User::find($id);
-            if ($user->is_provider == 1) {
-                Provider::where('user_id', $id)->delete();
-            } else {
-                Customer::where('user_id', $id)->delete();
-            }
-            User::destroy($id);
-            $data = "user removed successfully";
+            User::where("id", $id)->update([
+                "active" => 1
+            ]);
+            $data = "enabled user successfully";
         }
         return response()->json(['data' => $data], 200);
     }

@@ -9,6 +9,7 @@ use Validator;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use App\Services\Sale\SaleService;
+use App\Filters\Sale\SaleFilter;
 class SaleController extends Controller
 {
 
@@ -17,9 +18,10 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $saleFilter = (new SaleFilter())->apply($request->all());
+        return response()->json(['data'=> $saleFilter]);
     }
 
     /**
@@ -68,7 +70,7 @@ class SaleController extends Controller
             (new SaleService())->setParams($sale)->notification();
             
             DB::commit();
-            return response()->json(['data' => $sale], 200);
+            return response()->json(['data' => "successful order"], 200);
         } catch (Exception $ex) {
             return response()->json(['data' => $ex->getMessage()], 422);
         }
@@ -82,7 +84,7 @@ class SaleController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

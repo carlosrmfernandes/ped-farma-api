@@ -7,6 +7,7 @@ use App\Models\FavoriteProduct;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Filters\Favorite\FavoriteFilter;
 use Validator;
 
 class FavoriteProductController extends Controller
@@ -17,9 +18,10 @@ class FavoriteProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
+        $favorite = (new FavoriteFilter())->apply($request->all());
+        return response()->json(['data' => $favorite]);
     }
 
     /**
@@ -64,8 +66,13 @@ class FavoriteProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {        
+        $favoriteProduct = FavoriteProduct::with('product')->find($id);
+        if ($favoriteProduct) {
+            return response()->json($favoriteProduct);
+        } else {
+            return response()->json(['data' => 'favorite product not found']);
+        }
     }
 
     /**
@@ -88,7 +95,7 @@ class FavoriteProductController extends Controller
      */
     public function destroy($id)
     {
-        $customer = Customer::where('user_id', auth()->user()->id)->first();        
+        $customer = Customer::where('user_id', auth()->user()->id)->first();
         if ($customer && ($customer->user_id == auth()->user()->id)) {
             $favoriteProduct = FavoriteProduct::where('id', $id)->first();
             if ($favoriteProduct) {

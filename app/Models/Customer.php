@@ -22,7 +22,7 @@ class Customer extends Model
         'name', 'phone', 'address', 'number', 'city','active', 'user_id'
     ];
     protected $visible = [
-        'name', 'phone', 'address', 'number', 'city','active', 'user_id'
+        'id','name', 'phone', 'address', 'number', 'city','active', 'user_id'
     ];
     
     static function rules($id = null)

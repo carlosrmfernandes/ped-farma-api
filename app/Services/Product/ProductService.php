@@ -66,6 +66,7 @@ class ProductService
                 $sale = Sale::where('product_id', $obj->id)->first();
                 FavoriteProduct::where('product_id', $obj->id)->delete();
                 if (!$sale) {
+                    Storage::disk('public')->delete($obj->attachment);
                     $obj->delete();
                 }
             });

@@ -23,7 +23,7 @@ class FavoriteProduct extends Model
         'product_id', 'customer_id'
     ];
     protected $visible = [
-        'product_id', 'customer_id'
+        'id','product_id','product','customer_id'
     ];
 
     static function rules($id = null)
@@ -38,6 +38,11 @@ class FavoriteProduct extends Model
         $customer = Customer::where('user_id', auth()->user()->id)->first();
         $favoriteProduct = FavoriteProduct::where('customer_id', $customer->id)->where('product_id', $roductId)->first();
         return $favoriteProduct;
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'id', 'product_id');
     }
 
 }

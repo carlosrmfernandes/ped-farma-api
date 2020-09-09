@@ -22,7 +22,7 @@ class Provider extends Model
         'name', 'phone', 'number', 'city', 'cnpj', 'user_id','address'
     ];
     protected $visible = [
-        'name', 'phone', 'number', 'city', 'cnpj', 'user_id','address'
+        'id','name', 'phone', 'number', 'city', 'cnpj', 'user_id','address'
     ];
 
     static function rules($id = null)

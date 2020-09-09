@@ -24,13 +24,15 @@ Route::group(['middleware' => ['apiJwt'], 'prefix' => 'auth',], function ($route
     Route::get('user-view/{id}', 'UserController@show')->middleware('chekUser');
     Route::post('user-update/{id}', 'UserController@update')->middleware('chekUser');
     Route::post('user-delete/{id}', 'UserController@destroy')->middleware('chekUser');
-    Route::resource('product', 'ProductController')->middleware('providerProduct');
-    Route::resource('sale', 'SaleController');
-    Route::resource('favorite', 'FavoriteProductController')->middleware('pavoriteCheckCustomer');
+    Route::post('product', 'ProductController@store')->middleware('checkProvider');
+    Route::get('product-view/{id}', 'ProductController@show');
+    Route::resource('sale', 'SaleController');    
+    Route::resource('favorite', 'FavoriteProductController')->middleware('checkCustomer');
 });
 
 
 Route::group(['prefix' => ''], function ($router) {
     Route::post('register-user', 'UserController@store');
     Route::post('login', 'AuthController@login');
+    Route::get('product', 'ProductController@index');
 });

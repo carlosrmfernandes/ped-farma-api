@@ -62,8 +62,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'apiJwt'=> \App\Http\Middleware\ApiProtectedRoute::class,
         'chekUser' => \App\Http\Middleware\CheckUser::class,
-        'providerProduct' => \App\Http\Middleware\providerProduct::class,
-        'pavoriteCheckCustomer' => \App\Http\Middleware\FavoriteCheckCustomer::class,
+        'checkProvider' => \App\Http\Middleware\CheckProvider::class,
+        'checkCustomer' => \App\Http\Middleware\CheckCustomer::class,
     ];
 
     /**

@@ -22,7 +22,7 @@ class Product extends Model
         'name', 'price', 'quantity', 'description','attachment','provider_id'
     ];
     protected $visible = [
-        'id','name', 'price', 'quantity', 'description','attachment','provider_id'
+        'id','name', 'price', 'quantity', 'description','attachment',
     ];
 
     static function rules($request)
