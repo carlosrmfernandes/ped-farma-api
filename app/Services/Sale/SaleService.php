@@ -38,8 +38,7 @@ class SaleService
         if ($provider) {
             $customerDetails = [];
             $customer = Customer::where('id', $this->details->customer_id)->first();
-            $product = Product::where('id', $this->details->product_id)->first();
-            $formPayment = FormPayment::where('id', $this->details->form_payment)->first();
+            $product = Product::where('id', $this->details->product_id)->first();            
             
             $customerDetails['nameCustomer']=$customer->name;
             $customerDetails['phoneCustomer']=$customer->phone;
@@ -49,8 +48,7 @@ class SaleService
             $customerDetails['priceProduct']=$product->price;
             $customerDetails['quantityProduct']=$this->details->quantity;
             $customerDetails['descriptionProduct']=$product->description;
-            $customerDetails['attachmentProduct']=$product->attachment;           
-            $customerDetails['attachmentProduct']=$product->attachment;           
+            $customerDetails['attachmentProduct']=$product->attachment;                       
             $customerDetails['total']=($this->details->quantity*$product->price);            
             $customerDetails['formPayment']=$this->details->form_payment==1?"Cartão":"Dinheiro";            
                         

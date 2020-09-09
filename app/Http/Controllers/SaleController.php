@@ -41,7 +41,7 @@ class SaleController extends Controller
 
         DB::beginTransaction();
         try {
-            $providerProduct = Product::where('id', $request->productId)->first();
+            $providerProduct = Product::where('id', $request->productId)->first();            
             if ($providerProduct->quantity < $request->quantity) {
                 return response()->json(['data' => 'insufficient quantity in stock']);
             }
@@ -54,7 +54,7 @@ class SaleController extends Controller
             if ($customer) {
                 $sale = Sale::create([
                             'customer_id' => $customer->id,
-                            'provider_id' => $providerProduct->id,
+                            'provider_id' => $providerProduct->provider_id,
                             'product_id' => $request->productId,
                             'quantity' => $request->quantity,
                             'form_payment' => $request->formPayment

@@ -26,7 +26,7 @@ Route::group(['middleware' => ['apiJwt'], 'prefix' => 'auth',], function ($route
     Route::post('user-delete/{id}', 'UserController@destroy')->middleware('chekUser');
     Route::post('product', 'ProductController@store')->middleware('checkProvider');
     Route::get('product-view/{id}', 'ProductController@show');
-    Route::resource('sale', 'SaleController');    
+    Route::resource('sale', 'SaleController')->middleware('chekUserExist');    
     Route::resource('favorite', 'FavoriteProductController')->middleware('checkCustomer');
 });
 

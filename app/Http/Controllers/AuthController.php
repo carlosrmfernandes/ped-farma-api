@@ -7,6 +7,7 @@ use function auth;
 use function request;
 use function response;
 use App\Models\User;
+
 class AuthController extends Controller
 {
 
@@ -27,16 +28,20 @@ class AuthController extends Controller
      */
     public function login()
     {
-        
+
         $credentials = request(['email', 'password']);
         $user = User::where('email', request(['email'])['email'])->first();
-        if (!$user->active || $user->active != 1) {
-            return response()->json(['error' => 'without permission'],401);
+        if ($user) {
+            if (!$user->active || $user->active != 1) {
+                return response()->json(['error' => 'without permission'], 401);
+            }
+            if (!$token = auth('api')->attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+            return $this->respondWithToken($token);
+        } else {
+            return response()->json(['data' => 'user not found']);
         }
-        if (!$token = auth('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-        return $this->respondWithToken($token);
     }
 
     /**

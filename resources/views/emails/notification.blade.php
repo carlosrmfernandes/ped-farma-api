@@ -4,8 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -61,55 +59,33 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .text-left{
+                float: left;
+            }
         </style>
     </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+    <body>                                  
+        <p style="color: black;padding: 8px;text-align: center;">
+            <b>Olá,</b> {{$details['nameCustomer']}} solicitou à compra do seguinte produto<br>
+            {{$details['descriptionProduct']}}
+        </p>
+        <div class="flex-center position-ref full-height">            
+            <div class="content" style="padding: 15px;background: white;margin-top: -65px; ">                
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-                
-                <div class="links">
-                                       
-                    Dados do Comprador:<br>
-                    Nome: {{$details['nameCustomer']}}<br>
-                    Celular: {{$details['phoneCustomer']}}<br>
-                    Endereço:  {{$details['addressCustomer']}}<br>
-                    Cidade:  {{$details['cityCustomer']}}<br>
-                    
-                    Dados do Produto:<br>
-                    Item: {{$details['nameProduct']}}<br>
-                    Preço: {{$details['priceProduct']}}<br>
-                    Quantidade: {{$details['quantityProduct']}}<br>
-                    Descrição: {{$details['descriptionProduct']}}<br>
-                    Total: {{$details['total']}}<br>
-                    Forma de pagamento: {{$details['formPayment']}}<br>                    
-                    
-                    <br>
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="links">                    
+                    <img src="{{env('APP_URL')}}/storage/{{$details['attachmentProduct']?$details['attachmentProduct']:'imagens/produto-sem-img.jpg'}}" alt="" style="width: 280px;height: 283px; position: relative;top: 64%;"/><br>                    
+                    <span class="text-left" style="text-transform: uppercase;">Mad</span><br>
+                    <span class="text-left">Quantidade: {{$details['quantityProduct']}} / Unidade R$: {{$details['priceProduct']}}</span><br>                                                            
+                    <span class="text-left">Forma de pagamento: {{$details['formPayment']}}</span><br>                    
+                    <span style="float: left; color: #4285f4;text-transform: uppercase;"><b>Total R$: {{$details['total']}}</b></span><br>
+                    <strong class="text-left">Dados do Comprador:</strong><br>
+                    <span class="text-left">Nome: {{$details['nameCustomer']}}</span><br>
+                    <span class="text-left">Celular: {{$details['phoneCustomer']}}</span><br>
+                    <span class="text-left">Endereço:   {{$details['addressCustomer']}}</span><br>
+                    <span class="text-left">Cidade:  {{$details['cityCustomer']}}</span><br>
                 </div>
             </div>
         </div>
     </body>
 </html>
+

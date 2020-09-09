@@ -29,7 +29,7 @@ class Product extends Model
     {
         foreach ($request['product'] as $pt) {
 
-            if (empty($pt['name']) || empty($pt['price']) || empty($pt['quantity']) || empty($pt['description'])) {
+            if (empty($pt['name']) || empty($pt['price']) || empty($pt['quantity']) || empty($pt['description'])) {                
                 return ["The name,price,quantity,description field is required"];
             }
         }

@@ -27,7 +27,7 @@ class SaleFilter
 
     public function apply($request)
     {
-
+                
         $customer = Customer::where('user_id', auth()->user()->id)->first();
         $provider = Provider::where('user_id', auth()->user()->id)->first();
 
