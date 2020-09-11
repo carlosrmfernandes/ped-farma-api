@@ -10,6 +10,8 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use App\Services\Sale\SaleService;
 use App\Filters\Sale\SaleFilter;
+use App\Models\Provider;
+
 class SaleController extends Controller
 {
 
@@ -21,7 +23,7 @@ class SaleController extends Controller
     public function index(Request $request)
     {
         $saleFilter = (new SaleFilter())->apply($request->all());
-        return response()->json(['data'=> $saleFilter]);
+        return response()->json(['data' => $saleFilter]);
     }
 
     /**
@@ -41,7 +43,7 @@ class SaleController extends Controller
 
         DB::beginTransaction();
         try {
-            $providerProduct = Product::where('id', $request->productId)->first();                         
+            $providerProduct = Product::where('id', $request->productId)->first();
             if (!$providerProduct) {
                 return response()->json(['error' => 'product not found']);
             }
@@ -68,9 +70,9 @@ class SaleController extends Controller
             }
             //Notificando Fornecedores
             (new SaleService())->setParams($sale)->notification();
-            
+
             DB::commit();
-            return response()->json(['data' => "successful order"], 200);
+            return response()->json(['data' => "successful order the supplier was notified by email"], 200);
         } catch (Exception $ex) {
             return response()->json(['data' => $ex->getMessage()], 422);
         }
@@ -84,7 +86,27 @@ class SaleController extends Controller
      */
     public function show($id)
     {
-        
+        $sale = Sale::with('product')->where('id', $id)->first();
+        if ($sale) {
+            $customer = Customer::where('user_id', auth()->user()->id)->first();
+            $provider = Provider::where('user_id', auth()->user()->id)->first();
+
+            if ($provider) {
+                if ($sale->provider_id != $provider->id) {
+                    return response()->json(['data' => 'without permission to view this sale']);
+                } else {
+                    return response()->json(['data' => $sale], 200);
+                }
+            } else {
+                if ($sale->customer_id != $customer->id) {
+                    return response()->json(['data' => 'without permission to view this sale']);
+                } else {
+                    return response()->json(['data' => $sale], 200);
+                }
+            }
+        } else {
+            return response()->json(['data' => 'not found'], 200);
+        }
     }
 
     /**

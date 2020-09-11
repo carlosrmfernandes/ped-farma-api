@@ -81,7 +81,10 @@ class UserController extends Controller
                 ]);
             }
             DB::commit();
-            return response()->json(['data' => $user], 200);
+            return response()->json(['data' => $user->is_provider == 1 ?
+                        $user->with('providers')->where('id', $user->id)->first() :
+                        $user->with('customer')->where('id', $user->id)->first()
+                            ], 200);
         } catch (Exception $ex) {
             return response()->json(['data' => $ex->getMessage()], 422);
         }
@@ -177,7 +180,10 @@ class UserController extends Controller
                 }
             }
             DB::commit();
-            return response()->json(['data' => $user], 200);
+            return response()->json(['data' => $user->is_provider == 1 ?
+                        $user->with('providers')->where('id', $user->id)->first() :
+                        $user->with('customer')->where('id', $user->id)->first()
+                            ], 200);
         } catch (Exception $ex) {
             return response()->json(['data' => $ex->getMessage()], 422);
         }

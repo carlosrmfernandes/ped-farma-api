@@ -28,9 +28,9 @@ class Sale extends Model
     static function rules($id = null)
     {
         return [
-            'productId' => 'required',
-            'quantity' => 'required',
-            'formPayment' => 'required',
+            'productId' => 'required|integer',
+            'quantity' => 'required|integer',
+            'formPayment' => 'required|integer',
         ];
     }
 

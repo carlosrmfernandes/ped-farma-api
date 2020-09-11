@@ -66,10 +66,15 @@ class FavoriteProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {        
+    {
         $favoriteProduct = FavoriteProduct::with('product')->find($id);
         if ($favoriteProduct) {
-            return response()->json($favoriteProduct);
+            $customer = Customer::where('user_id', auth()->user()->id)->first();
+            if ($favoriteProduct->customer_id != $customer->id) {
+                return response()->json(['data' => 'without permission to view this sale']);
+            } else {
+                return response()->json($favoriteProduct);
+            }
         } else {
             return response()->json(['data' => 'favorite product not found']);
         }
@@ -95,17 +100,19 @@ class FavoriteProductController extends Controller
      */
     public function destroy($id)
     {
-        $customer = Customer::where('user_id', auth()->user()->id)->first();
-        if ($customer && ($customer->user_id == auth()->user()->id)) {
-            $favoriteProduct = FavoriteProduct::where('id', $id)->first();
-            if ($favoriteProduct) {
-                FavoriteProduct::where('id', $id)->delete();
-                return response()->json(['data' => 'Favorite product removed successfully'], 200);
-            } else {
-                return response()->json(['error' => 'Favorite product not found']);
+        $favoriteProduct = FavoriteProduct::with('product')->find($id);
+        if ($favoriteProduct) {
+            $customer = Customer::where('user_id', auth()->user()->id)->first();
+            if ($customer) {
+                if ($favoriteProduct->customer_id != $customer->id) {
+                    return response()->json(['data' => 'without permission to delete this sale']);
+                } else {
+                    FavoriteProduct::where('id', $id)->delete();
+                    return response()->json(['data' => 'Favorite product removed successfully'], 200);
+                }
             }
         } else {
-            return response()->json(['data' => 'without permission']);
+            return response()->json(['error' => 'Favorite product not found']);
         }
     }
 

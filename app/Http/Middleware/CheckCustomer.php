@@ -17,15 +17,17 @@ class CheckCustomer
      */
     public function handle($request, Closure $next)
     {
-        
+
+
         $customer = Customer::where('user_id', auth()->user()->id)->first();
-        if ( auth()->user()->id ) {            
+        if ($customer) {
             if (auth()->user() && (auth()->user()->id != $customer->user_id)) {
                 return response()->json(['data' => 'without permission']);
             }
         } else {
             return response()->json(['error' => 'Customer not found']);
         }
+
 
         return $next($request);
     }

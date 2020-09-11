@@ -7,6 +7,8 @@ use App\Models\Product;
 use Validator;
 use App\Services\Product\ProductService;
 use App\Filters\Product\ProductFilter;
+use App\Models\Sale;
+
 class ProductController extends Controller
 {
 
@@ -16,9 +18,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {      
+    {
         $product = (new ProductFilter())->apply($request->all());
-        return response()->json(['data'=> $product]);
+        return response()->json(['data' => $product]);
     }
 
     /**
@@ -31,10 +33,10 @@ class ProductController extends Controller
     {
 
         $validatorProduct = Product::rules($request->all());
-        
+
         if (!empty($validatorProduct)) {
             return response()->json(['erro' => $validatorProduct]);
-        }        
+        }
         $product = (new ProductService())->setParams($request->all())->createOrUpdate();
         return response()->json(['data', $product], 200);
     }
@@ -47,10 +49,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product= Product::find($id);        
-        if($product){
+        $product = Product::find($id);
+        if ($product) {
             return response()->json($product);
-        }else{
+        } else {
             return response()->json(['data' => 'product not found']);
         }
     }
@@ -82,8 +84,20 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        
+        $data = null;
+        $sale = Sale::where('product_id', $id)->first();
+        if (!$sale) {
+            $product = Product::where('id', $id)->first();
+            if ($product) {
+                $data = "product successfully removed";
+                $product = Product::where('id', $id)->delete();
+            } else {
+                $data = "product not found";
+            }
+        } else {
+            $data = "This product is part of the sales history so it cannot be removed";
+        }
+        return response()->json(['data' => $data], 200);
     }
 
 }
-

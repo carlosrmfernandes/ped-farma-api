@@ -50,7 +50,7 @@ class User extends Authenticatable implements JWTSubject
     {        
         return [
             'name' => 'required|string|max:255',            
-            'is_provider' => 'required',
+            'is_provider' => 'required|integer|max:1',
             'email' => 'required|string|max:255|unique:users,email' . ($id == null ? '' : ',' . $id),
         ];
     }

@@ -29,7 +29,11 @@ class Provider extends Model
     {
         return [
             'name' => 'required|string|max:255',
-            'phone' => 'required|max:255',
+            'phone' => 'string|max:15',
+            'address' => 'string|max:255',
+            'number' => 'integer',
+            'city' => 'string|max:255',            
+            'phone' => 'required|string|max:255',
             'cnpj' => 'required|string|max:255|unique:providers,cnpj' . ($id == null ? '' : ',' . $id),
         ];
     }

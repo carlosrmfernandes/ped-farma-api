@@ -19,17 +19,17 @@ class Product extends Model
 {
 
     protected $fillable = [
-        'name', 'price', 'quantity', 'description','attachment','provider_id'
+        'name', 'price', 'quantity', 'description', 'attachment', 'provider_id'
     ];
     protected $visible = [
-        'id','name', 'price', 'quantity', 'description','attachment',
+        'id', 'name', 'price', 'quantity', 'description', 'attachment', 'provider_id',
     ];
 
     static function rules($request)
     {
         foreach ($request['product'] as $pt) {
-
-            if (empty($pt['name']) || empty($pt['price']) || empty($pt['quantity']) || empty($pt['description'])) {                
+            
+            if (empty($pt['name']) || empty($pt['price']) || empty($pt['quantity']) || empty($pt['description'])) {
                 return ["The name,price,quantity,description field is required"];
             }
         }
