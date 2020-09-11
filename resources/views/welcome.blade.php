@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://docs.google.com/document/d/1L9RR5Z5PjFCI_uhbXlZ7wjpjYtFYj2BWqaHCk0Fohc4/edit?usp=sharing">Documentation</a>                    
+                    <a href="https://drive.google.com/file/d/1K1CTrnBw5LEuNdh4rVDGfPg7znTcNCSG/view?usp=sharing">Documentation</a>                    
                     <a href="https://github.com/carlosrmfernandes/ped-farma-api">GitHub</a>
                 </div>
             </div>
