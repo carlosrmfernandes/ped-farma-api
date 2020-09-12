@@ -1,5 +1,5 @@
 ![alt text](https://is2-ssl.mzstatic.com/image/thumb/Purple123/v4/55/f0/d9/55f0d983-0ca7-57f7-ddd7-4a6de61e8457/AppIcon-0-1x_U007emarketing-0-0-GLES2_U002c0-512MB-sRGB-0-0-0-85-220-0-0-0-10.png/246x0w.png)
-## API RBE
+## API PedFarma
 
 ## Começando
 Essas instruções farão com que você tenha uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste. Veja a implantação de notas sobre como implantar o projeto em um sistema ativo.
