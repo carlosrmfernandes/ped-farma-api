@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Http/Controllers/UserController.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/routes/api.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Http/Controllers/ProductController.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Filters/Favorite/FavoriteFilter.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Models/Provider.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Http/Middleware/CheckUser.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Http/Controllers/FavoriteProductController.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/resources/views/welcome.blade.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Models/FavoriteProduct.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/database/migrations/2020_09_05_193644_create_table_product.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Models/Product.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Http/Middleware/CheckProvider.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Http/Middleware/CheckCustomer.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/.env</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Models/Sale.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Models/User.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/composer.json</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Services/Product/ProductService.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Services/Sale/SaleService.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Http/Controllers/AuthController.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Filters/Sale/SaleFilter.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Http/Middleware/ChekUserExist.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Http/Controllers/SaleController.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/resources/views/emails/notification.blade.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/app/Models/Customer.php</file>
+            <file>file:/Applications/MAMP/htdocs/api-Ped-farma/storage/app/.gitignore</file>
+        </group>
+    </open-files>
 </project-private>

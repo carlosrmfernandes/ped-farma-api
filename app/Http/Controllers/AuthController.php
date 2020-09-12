@@ -33,7 +33,7 @@ class AuthController extends Controller
         $user = User::where('email', request(['email'])['email'])->first();
         if ($user) {
             if (!$user->active || $user->active != 1) {
-                return response()->json(['error' => 'without permission'], 401);
+                return response()->json(['error' => 'without permission, disabled user'], 401);
             }
             if (!$token = auth('api')->attempt($credentials)) {
                 return response()->json(['error' => 'Unauthorized'], 401);
@@ -85,13 +85,12 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-        $user = auth('api')->user();        
-        
+        $user = auth('api')->user();                
         return response()->json([
                     'access_token' => $token,
                     'token_type' => 'bearer',
                     'expires_in' => auth('api')->factory()->getTTL() * 60,
-                    'user' => $user->is_customer?$user->with('customer')->first():$user->with('providers')->first()
+                    'user' => $user->is_provider?$user->with('providers')->where('id',$user->id)->first():$user->with('customer')->where('id',$user->id)->first()
         ]);
     }
 

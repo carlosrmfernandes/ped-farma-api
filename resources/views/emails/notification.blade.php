@@ -74,7 +74,7 @@
 
                 <div class="links">                    
                     <img src="{{env('APP_URL')}}/storage/{{$details['attachmentProduct']?$details['attachmentProduct']:'imagens/produto-sem-img.jpg'}}" alt="" style="width: 280px;height: 283px; position: relative;top: 64%;"/><br>                    
-                    <span class="text-left" style="text-transform: uppercase;">Mad</span><br>
+                    <span class="text-left" style="text-transform: uppercase;">{{$details['nameProduct']}}</span><br>
                     <span class="text-left">Quantidade: {{$details['quantityProduct']}} / Unidade R$: {{$details['priceProduct']}}</span><br>                                                            
                     <span class="text-left">Forma de pagamento: {{$details['formPayment']}}</span><br>                    
                     <span style="float: left; color: #4285f4;text-transform: uppercase;"><b>Total R$: {{$details['total']}}</b></span><br>
