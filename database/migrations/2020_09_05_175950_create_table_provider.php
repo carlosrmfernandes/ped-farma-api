@@ -16,8 +16,7 @@ class CreateTableProvider extends Migration
     {
 
         Schema::create('providers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string("name");
+            $table->bigIncrements('id');            
             $table->string("phone");
             $table->string("address");
             $table->integer("number")->nullable();

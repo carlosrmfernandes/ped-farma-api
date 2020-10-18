@@ -10,6 +10,7 @@ use Validator;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\VerifyCnpj;
 use function bcrypt;
+use App\Filters\User\UserFilters;
 
 class UserController extends Controller
 {
@@ -19,9 +20,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $users = (new UserFilters())->apply($request->all());
+        return response()->json(['data' => $users]);
     }
 
     /**
@@ -47,6 +49,9 @@ class UserController extends Controller
                         "password" => bcrypt($request->password),
                         "active" => 1,
                         "is_provider" => $request->is_provider,
+                        "is_admin" => $request->is_admin,
+                        "last_name" => $request->last_name,
+                        "name" => $request->name,
             ]);
 
             if ($user && ($request->is_provider == 1)) {
@@ -58,7 +63,6 @@ class UserController extends Controller
                     return response()->json(['error' => 'cnpj invalid']);
                 }
                 Provider::create([
-                    'name' => $request->name,
                     'phone' => $request->phone,
                     'address' => $request->address,
                     'number' => $request->number,
@@ -72,7 +76,6 @@ class UserController extends Controller
                     return response()->json(['error' => $validatorCustomer->errors()]);
                 }
                 Customer::create([
-                    'name' => $request->name,
                     'phone' => $request->phone,
                     'address' => $request->address,
                     'number' => $request->number,
@@ -151,7 +154,6 @@ class UserController extends Controller
                 $provider = Provider::where('user_id', $user->id)->first();
                 if ($provider) {
                     $provider->update([
-                        'name' => $request->name,
                         'phone' => $request->phone,
                         'address' => $request->address,
                         'number' => $request->number,
@@ -169,7 +171,6 @@ class UserController extends Controller
                 $customer = Customer::where('user_id', $user->id)->first();
                 if ($customer) {
                     $customer->update([
-                        'name' => $request->name,
                         'phone' => $request->phone,
                         'address' => $request->address,
                         'number' => $request->number,

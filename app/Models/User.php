@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'is_provider', 'is_customer','active',
+        'name', 'email', 'password','last_name', 'is_provider', 'is_customer','active','is_admin',
     ];
 
     /**
@@ -52,6 +52,7 @@ class User extends Authenticatable implements JWTSubject
             'name' => 'required|string|max:255',            
             'password' => 'required|string|max:255',            
             'is_provider' => 'required|integer|max:1',
+            'last_name' => 'required|string|max:255',            
             'email' => 'required|string|max:255|unique:users,email' . ($id == null ? '' : ',' . $id),
         ];
     }

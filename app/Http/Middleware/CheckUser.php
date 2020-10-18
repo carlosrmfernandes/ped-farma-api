@@ -15,8 +15,8 @@ class CheckUser
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {        
-        if (auth()->user()->id != $request->id) {
+    {
+        if (!auth()->user()->is_admin) {
             return response()->json(['data' => 'without permission']);
         }
         return $next($request);

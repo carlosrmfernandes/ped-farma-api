@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,11 +15,14 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');            
+            $table->bigIncrements('id');
+            $table->string("name");
+            $table->string("last_name");
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();                        
-            $table->boolean('active');                        
-            $table->integer('is_provider');                        
+            $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('active');
+            $table->boolean('is_admin');
+            $table->integer('is_provider');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -34,4 +38,5 @@ class CreateUsersTable extends Migration
     {
         Schema::dropIfExists('users');
     }
+
 }
