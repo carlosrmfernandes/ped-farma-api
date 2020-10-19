@@ -40,16 +40,17 @@ php artisan serve
 ## Configuração de envio de email 
 
 Para teste de preferência usar o serviço mailtrap 
+```php
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.mailtrap.io
 MAIL_PORT=2525
 MAIL_USERNAME=
 MAIL_PASSWORD=
 MAIL_ENCRYPTION=tls
-
+```
 ## Link da documentação 
 
-https://drive.google.com/file/d/13nlU0WoKAfzrsJjuAaoG1ffH8O7BUGYP/view?usp=sharing
+https://drive.google.com/file/d/1N58tzhURMGvYIsJAHfuICF0Sgnzm-zPU/view?usp=sharing
 
 
 ## Link da collections 
