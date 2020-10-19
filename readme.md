@@ -37,6 +37,21 @@ php artisan migrate
 ```php
 php artisan serve
 ```
+## Configuração de envio de email 
+
+Para teste de preferência usar o serviço mailtrap 
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=tls
+
 ## Link da documentação 
 
-https://drive.google.com/file/d/1_OvFOZ1fmKbdUGWGf5xUCfz8xu7U4L7X/view
+https://drive.google.com/file/d/13nlU0WoKAfzrsJjuAaoG1ffH8O7BUGYP/view?usp=sharing
+
+
+## Link da collections 
+
+https://www.postman.com/collections/47a7536f2359b39d4d4a
